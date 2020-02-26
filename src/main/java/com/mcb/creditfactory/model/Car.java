@@ -1,28 +1,27 @@
 package com.mcb.creditfactory.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "CAR")
-public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String brand;
-    private String model;
+@ToString(callSuper = true)
+public class Car extends CollateralBaseEntity {
+
+    @Column(name = "power")
     private Double power;
 
-    @Column(name = "year_of_issue")
-    private Short year;
-
-    @Column(name = "assessed_value")
-    private BigDecimal value;
+    public Car(Long id, String brand, String model, short year, Double power) {
+        super(id, brand, model, year);
+        this.power = power;
+    }
 }
